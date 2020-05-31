@@ -1,0 +1,52 @@
+{
+    "private": true,
+    "name": "@tarojsx/website",
+    "description": "tarojsx website",
+    "version": "0.0.0",
+    "author": "colder",
+    "scripts": {
+        "prestart": "node sync",
+        "start": "docusaurus start",
+        "build": "docusaurus build",
+        "deploy": "docusaurus deploy"
+    },
+    "dependencies": {
+        "@docusaurus/core": "^2.0.0-alpha.56",
+        "@docusaurus/preset-classic": "^2.0.0-alpha.56",
+        "@docusaurus/theme-live-codeblock": "^2.0.0-alpha.56",
+        "@tarojsx/ui": "^0.11.0",
+        "classnames": "^2.2.6",
+        "docusaurus-plugin-sass": "^0.1.8",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    },
+    "devDependencies": {
+        "@docusaurus/init": "^2.0.0-alpha.56",
+        "@tarojs/cli": "^3.0.0-rc.3",
+        "@tarojs/mini-runner": "^3.0.0-rc.3",
+        "@types/execa": "^2.0.0",
+        "@types/webpack": "^4.41.16",
+        "babel-preset-taro": "^3.0.0-rc.3",
+        "execa": "^4.0.2",
+        "webpack-chain": "^6.4.0"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "prettier": {
+        "semi": false,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "bracketSpacing": true,
+        "printWidth": 120
+    }
+}
