@@ -1,13 +1,13 @@
 const path = require('path')
 const child = require('child_process')
-const { LoadContext, Plugin } = require('@docusaurus/types')
+const docusaurus = require('@docusaurus/types')
 const webpack = require('webpack')
 
 /**
  *
- * @param {LoadContext} context
+ * @param {docusaurus.LoadContext} context
  * @param {*} opts
- * @returns {Plugin}
+ * @returns {docusaurus.Plugin}
  */
 module.exports = function pluginSyncDocs(context, opts) {
     return {
@@ -54,17 +54,44 @@ module.exports = function pluginSyncDocs(context, opts) {
          *
          * @param {webpack.Configuration} config
          * @param {boolean} isServer
+         * @param {docusaurus.ConfigureWebpackUtils} utils
          * @returns {webpack.Configuration}
          */
-        configureWebpack(config, isServer) {
+        configureWebpack(config, isServer, { getCacheLoader, getBabelLoader }) {
             // Modify internal webpack config. If returned value is an Object, it
             // will be merged into the final config using webpack-merge;
             // If the returned value is a function, it will receive the config as the 1st argument and an isServer flag as the 2nd argument.
+
             // console.log('configureWebpack', config)
+
+            const babelLoader = getBabelLoader(isServer)
+            babelLoader.options.presets.push([
+                'taro',
+                {
+                    framework: 'react',
+                    ts: true,
+                },
+            ])
+            console.log('babelLoader', babelLoader)
+
             // config.devServer = config.devServer || {}
             // config.devServer.open = false
             // return config
             return {
+                // module: {
+                //     rules: [
+                //         {
+                //             test: /(\.mdx)$/,
+                //             use: [
+                //                 getCacheLoader(isServer),
+                //                 babelLoader,
+                //                 {
+                //                     loader: require.resolve('@docusaurus/mdx-loader'),
+                //                 },
+                //             ].filter(Boolean),
+                //         },
+                //     ],
+                // },
                 devServer: { open: false },
             }
         },

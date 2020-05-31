@@ -92,8 +92,8 @@ module.exports = {
 
 ## 参考
 
-- **基础**
-  - [useThrottleCallback](./docs/useThrottleCallback.mdx) &mdash; 函数防抖.
+- **基础** 
+  - [useThrottleCallback](./docs/useThrottleCallback.mdx) &mdash; 函数节流.
 
 - **环境**
   - [useRouterParams](./docs/useRouterParams.mdx) &mdash; 获取页面路由参数.
@@ -103,7 +103,7 @@ module.exports = {
   - [usePullDownRefresh](./docs/usePullDownRefresh.mdx) &mdash; 监听用户下拉刷新事件, 回调完成后自动收起.
 
 - **生命周期**
-  - [useDidShowAgain](./docs/useDidShowAgain.mdx) &mdash; 页面**再次**展示时的回调.
+  - [useDidShowAgain](./docs/useDidShowAgain.mdx) &mdash; 页面**再次**显示时的回调.
   - [useLogger](./docs/useLogger.mdx) &mdash; 打印组件生命周期.
 
 ## 支持

@@ -14,11 +14,13 @@
         "@docusaurus/core": "^2.0.0-alpha.56",
         "@docusaurus/preset-classic": "^2.0.0-alpha.56",
         "@docusaurus/theme-live-codeblock": "^2.0.0-alpha.56",
+        "@tarojs/components": "^3.0.0-rc.3",
         "@tarojsx/ui": "^0.11.0",
         "classnames": "^2.2.6",
         "docusaurus-plugin-sass": "^0.1.8",
         "react": "^16.13.1",
-        "react-dom": "^16.13.1"
+        "react-dom": "^16.13.1",
+        "taro-ui": "^3.0.0-alpha.2"
     },
     "devDependencies": {
         "@docusaurus/init": "^2.0.0-alpha.56",

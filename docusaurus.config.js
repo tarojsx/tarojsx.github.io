@@ -1,5 +1,5 @@
 const path = require('path')
-const docusaurus = require('@docusaurus/types/src/index')
+const docusaurus = require('@docusaurus/types')
 
 /**
  * @type {docusaurus.DocusaurusConfig}
@@ -18,7 +18,7 @@ module.exports = {
             {
                 docs: {
                     // It is recommended to set document id as docs home page (`docs/` path).
-                    // homePageId: 'doc1',
+                    homePageId: 'index',
                     sidebarPath: require.resolve('./sidebars.js'),
                     // Please change this to your repo.
                     // editUrl: 'https://github.com/tarojsx/tarojsx.github.io/edit/master/docs',
@@ -30,6 +30,11 @@ module.exports = {
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
+                },
+                /* colors for website */
+                colors: {
+                    primaryColor: '#0000c2',
+                    secondaryColor: '#4a72ea',
                 },
             },
         ],
@@ -46,28 +51,28 @@ module.exports = {
             },
             links: [
                 {
-                    to: 'docs/ui/readme',
+                    to: 'docs/ui/README',
                     label: 'UI',
                     position: 'left',
                 },
                 {
-                    to: 'docs/hooks/readme',
+                    to: 'docs/hooks/README',
                     label: 'Hooks',
                     position: 'left',
                 },
                 {
-                    to: '/library',
+                    to: 'docs/library/README',
                     label: 'Library',
                     position: 'left',
                 },
                 {
-                    to: '/blog',
-                    label: 'Blog',
+                    to: 'blog',
+                    label: '博客',
                     position: 'left',
                 },
                 {
                     href: 'https://github.com/tarojsx',
-                    label: 'GitHub',
+                    className: 'octicon-mark-github',
                     position: 'right',
                 },
             ],
