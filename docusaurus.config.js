@@ -31,11 +31,6 @@ module.exports = {
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
                 },
-                /* colors for website */
-                colors: {
-                    primaryColor: '#0000c2',
-                    secondaryColor: '#4a72ea',
-                },
             },
         ],
     ],
@@ -63,6 +58,16 @@ module.exports = {
                 {
                     to: 'docs/library/README',
                     label: 'Library',
+                    position: 'left',
+                },
+                {
+                    to: 'docs/polyfill/README',
+                    label: 'Polyfill',
+                    position: 'left',
+                },
+                {
+                    to: 'docs/history/README',
+                    label: 'History',
                     position: 'left',
                 },
                 {

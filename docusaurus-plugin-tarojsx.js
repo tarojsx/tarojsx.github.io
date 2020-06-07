@@ -64,15 +64,15 @@ module.exports = function pluginSyncDocs(context, opts) {
 
             // console.log('configureWebpack', config)
 
-            const babelLoader = getBabelLoader(isServer)
-            babelLoader.options.presets.push([
-                'taro',
-                {
-                    framework: 'react',
-                    ts: true,
-                },
-            ])
-            console.log('babelLoader', babelLoader)
+            // const babelLoader = getBabelLoader(isServer)
+            // babelLoader.options.presets.push([
+            //     'taro',
+            //     {
+            //         framework: 'react',
+            //         ts: true,
+            //     },
+            // ])
+            // console.log('babelLoader', babelLoader)
 
             // config.devServer = config.devServer || {}
             // config.devServer.open = false

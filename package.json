@@ -27,7 +27,7 @@
         "@tarojs/cli": "^3.0.0-rc.3",
         "@tarojs/mini-runner": "^3.0.0-rc.3",
         "@types/execa": "^2.0.0",
-        "@types/webpack": "^4.41.16",
+        "@types/webpack": "^4.41.17",
         "babel-preset-taro": "^3.0.0-rc.3",
         "execa": "^4.0.2",
         "webpack-chain": "^6.4.0"

@@ -26,4 +26,7 @@ module.exports = {
             items: ['hooks/docs/useDidShowAgain', 'hooks/docs/useLogger'],
         },
     ],
+    Library: [],
+    Polyfill: [],
+    History: [],
 }

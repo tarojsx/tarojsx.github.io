@@ -2401,7 +2401,19 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@types/webpack@^4.41.16", "@types/webpack@^4.41.8":
+"@types/webpack@^4.41.17":
+  version "4.41.17"
+  resolved "https://registry.npm.taobao.org/@types/webpack/download/@types/webpack-4.41.17.tgz?cache=0&sync_timestamp=1591057393390&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fwebpack%2Fdownload%2F%40types%2Fwebpack-4.41.17.tgz#0a69005e644d657c85b7d6ec1c826a71bebd1c93"
+  integrity sha1-CmkAXmRNZXyFt9bsHIJqcb69HJM=
+  dependencies:
+    "@types/anymatch" "*"
+    "@types/node" "*"
+    "@types/tapable" "*"
+    "@types/uglify-js" "*"
+    "@types/webpack-sources" "*"
+    source-map "^0.6.0"
+
+"@types/webpack@^4.41.8":
   version "4.41.16"
   resolved "https://registry.npm.taobao.org/@types/webpack/download/@types/webpack-4.41.16.tgz?cache=0&sync_timestamp=1590868908409&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fwebpack%2Fdownload%2F%40types%2Fwebpack-4.41.16.tgz#57b6154c5465401b0466c5fadcaf89dd98a77798"
   integrity sha1-V7YVTFRlQBsEZsX63K+J3Zind5g=
