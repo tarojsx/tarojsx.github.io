@@ -1,0 +1,87 @@
+---
+title: Taro.useXXX
+---
+
+对 Taro 专有 Hooks 进行包装
+
+taro 3.0 rc 版本专有 hooks 存在依赖更新问题, 一旦依赖更新, 新的回调会被合并到数组中, 下次调用时新旧回调一起调用. 如果不传依赖, 回调函数会停留在第一次传入的值不再更新.
+
+## 用法
+
+```jsx title="正确示例"
+import { useState } from 'react'
+import { View } from '@tarojs/components'
+import { useReachBottom } from '@tarojsx/hooks'
+
+const Demo = () => {
+    const [page, setPage] = useState(0)
+
+    useReachBottom(() => {
+        console.log(page)
+        setPage((prev) => prev + 1)
+    })
+
+    return <View style={{ height: '111vh' }} />
+}
+
+// 0
+// 1
+// 2
+```
+
+```jsx {8} title="不更新错误示范"
+import { useState } from 'react'
+import Taro from '@tarojs/taro'
+import { View } from '@tarojs/components'
+
+const IssueDemo = () => {
+    const [page, setPage] = useState(0)
+
+    Taro.useReachBottom(() => {
+        console.log(page)
+        setPage((prev) => prev + 1)
+    })
+
+    return <View style={{ height: '111vh' }} />
+}
+
+// 0
+// 0
+// 0
+```
+
+```jsx {8} title="重复调用错误示范"
+import { useState } from 'react'
+import Taro from '@tarojs/taro'
+import { View } from '@tarojs/components'
+
+const IssueDemo2 = () => {
+    const [page, setPage] = useState(0)
+
+    Taro.useReachBottom(() => {
+        console.log(page)
+        setPage((prev) => prev + 1)
+    }, [page])
+
+    return <View style={{ height: '111vh' }} />
+}
+
+// 0
+// 0,1
+// 0,1,2
+```
+
+## 参考
+
+-   [useDidShow](https://taro-docs.jd.com/taro/docs/next/hooks#usedidshow) &mdash; 页面展示时的回调
+-   [useDidHide](https://taro-docs.jd.com/taro/docs/next/hooks#usedidhide) &mdash; 页面隐藏时的回调
+-   [usePullDownRefresh](https://taro-docs.jd.com/taro/docs/next/hooks#usepulldownrefresh) &mdash; 监听用户下拉刷新事件
+-   [useReachBottom](https://taro-docs.jd.com/taro/docs/next/hooks#usereachbottom) &mdash; 监听用户上拉触底事件
+-   [usePageScroll](https://taro-docs.jd.com/taro/docs/next/hooks#usepagescroll) &mdash; 监听用户滑动页面事件
+-   [useResize](https://taro-docs.jd.com/taro/docs/next/hooks#useresize) &mdash; 小程序屏幕旋转时触发
+-   [useShareAppMessage](https://taro-docs.jd.com/taro/docs/next/hooks#useshareappmessage) &mdash; 监听用户点击页面内转发按钮（button 组件 open-type="share"）或右上角菜单“转发”按钮的行为，并自定义转发内容
+-   [useTabItemTap](https://taro-docs.jd.com/taro/docs/next/hooks#usetabitemtap)
+-   useTitleClick
+-   useOptionMenuClick
+-   usePullIntercept
+-   [useReady](https://taro-docs.jd.com/taro/docs/next/hooks#useready)

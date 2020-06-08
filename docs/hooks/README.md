@@ -93,6 +93,7 @@ module.exports = {
 ## 参考
 
 - **基础** 
+  - [Taro.useXXX](./docs/taroHooks.mdx) &mdash; 解决 Taro3 原生 Hooks 依赖更新问题.
   - [useThrottleCallback](./docs/useThrottleCallback.mdx) &mdash; 函数节流.
 
 - **环境**
@@ -100,7 +101,8 @@ module.exports = {
   
 - **界面**
   - [useNavigationBar](./docs/useNavigationBar.mdx) &mdash; 动态更新导航栏属性.
-  - [usePullDownRefresh](./docs/usePullDownRefresh.mdx) &mdash; 监听用户下拉刷新事件, 回调完成后自动收起.
+  - [useNavigationBarTitle](./docs/useNavigationBarTitle.mdx) &mdash; 动态更新导航栏标题.
+  - [usePullDownRefreshing](./docs/usePullDownRefreshing.mdx) &mdash; 监听用户下拉刷新事件, 回调完成后自动收起.
 
 - **生命周期**
   - [useDidShowAgain](./docs/useDidShowAgain.mdx) &mdash; 页面**再次**显示时的回调.

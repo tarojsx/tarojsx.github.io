@@ -1,0 +1,25 @@
+---
+title: usePullDownRefreshing
+---
+
+监听用户下拉刷新事件, 回调完成后自动收起.
+
+下拉效果默认停留最短 300ms, 防止收起过快让用户以为下拉不到位.
+
+## 用法
+
+```jsx
+import { usePullDownRefreshing } from '@tarojsx/hooks'
+
+const Demo = ({ id }) => {
+    usePullDownRefreshing(async () => {
+        await refresh()
+    })
+}
+```
+
+## 参考
+
+```ts
+usePullDownRefreshing(fn, delay?: number)
+```

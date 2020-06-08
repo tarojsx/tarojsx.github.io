@@ -8,7 +8,7 @@ module.exports = {
         {
             type: 'category',
             label: '基础',
-            items: ['hooks/docs/useThrottleCallback'],
+            items: ['hooks/docs/taroHooks', 'hooks/docs/useThrottleCallback'],
         },
         {
             type: 'category',
@@ -18,7 +18,11 @@ module.exports = {
         {
             type: 'category',
             label: '界面',
-            items: ['hooks/docs/useNavigationBar', 'hooks/docs/usePullDownRefresh'],
+            items: [
+                'hooks/docs/useNavigationBar',
+                'hooks/docs/useNavigationBarTitle',
+                'hooks/docs/usePullDownRefreshing',
+            ],
         },
         {
             type: 'category',
