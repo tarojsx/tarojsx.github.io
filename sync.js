@@ -16,7 +16,7 @@ async function main() {
 
             ['./node_modules/@tarojsx/polyfill/README.md', './docs/polyfill/README.md'],
 
-            ['./node_modules/@tarojsx/ui/docs/components', './docs/ui/docs'],
+            ['./node_modules/@tarojsx/ui/docs', './docs/ui'],
             ['./node_modules/@tarojsx/ui/README.md', './docs/ui/README.md'],
         ].map(p => rsync(...p))
     )

@@ -94,51 +94,46 @@ module.exports = {
         },
         footer: {
             style: 'dark',
-            // links: [
-            //     {
-            //         title: 'Docs',
-            //         items: [
-            //             {
-            //                 label: 'Style Guide',
-            //                 to: 'docs/doc1',
-            //             },
-            //             {
-            //                 label: 'Second Doc',
-            //                 to: 'docs/doc2',
-            //             },
-            //         ],
-            //     },
-            //     {
-            //         title: 'Community',
-            //         items: [
-            //             {
-            //                 label: 'Stack Overflow',
-            //                 href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            //             },
-            //             {
-            //                 label: 'Discord',
-            //                 href: 'https://discordapp.com/invite/docusaurus',
-            //             },
-            //         ],
-            //     },
-            //     {
-            //         title: 'Social',
-            //         items: [
-            //             {
-            //                 label: 'Blog',
-            //                 to: 'blog',
-            //             },
-            //             {
-            //                 label: 'GitHub',
-            //                 href: 'https://github.com/facebook/docusaurus',
-            //             },
-            //             {
-            //                 label: 'Twitter',
-            //                 href: 'https://twitter.com/docusaurus',
-            //             },
-            //         ],
-            //     },
-            // ],
+            links: [
+                {
+                    title: '文档',
+                    items: [
+                        {
+                            label: '重新发明的 UI',
+                            to: 'docs/ui/README',
+                        },
+                        {
+                            label: '必备 Hooks',
+                            to: 'docs/hooks/README',
+                        },
+                        {
+                            label: '第三方 Library',
+                            to: 'docs/library/README',
+                        },
+                        {
+                            label: '运行时补丁 Polyfill',
+                            to: 'docs/polyfill/README',
+                        },
+                        {
+                            label: 'History API',
+                            to: 'docs/history/README',
+                        },
+                    ],
+                },
+                {
+                    title: '社区',
+                    items: [
+                        {
+                            label: '博客',
+                            to: 'blog',
+                        },
+                        {
+                            label: 'GitHub',
+                            href: 'https://github.com/tarojsx',
+                        },
+                    ],
+                },
+            ],
             copyright: `Copyright © 2019-${new Date().getFullYear()} TaroX org. Built with Docusaurus.`,
         },
         prism: {
