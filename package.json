@@ -20,6 +20,7 @@
         "docusaurus-plugin-sass": "^0.1.8",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
+        "react-window": "^1.8.5",
         "taro-ui": "^3.0.0-alpha.2"
     },
     "devDependencies": {

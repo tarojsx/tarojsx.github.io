@@ -1,0 +1,185 @@
+---
+id: 2020-06-08-taro3-virtual-list
+title: Taro3 探索 - 虚拟列表 react-window
+author: Colder
+author_url: https://github.com/cncolder
+author_image_url: https://avatars1.githubusercontent.com/u/127009
+tags: [Taro3, 探索, 虚拟列表]
+---
+
+![First Birthday Slash](/img/taro3-virtual-list-preview.png)
+
+虚拟列表作为一种常见的优化手段，可以拆分数据，缩减需要显示的组件数量，在显示大量数据时非常有用。例如 React Web 领域大名鼎鼎的 [react-virtualized](https://github.com/bvaughn/react-virtualized) 和 React Native 自带的 [FlatList](https://reactnative.cn/docs/flatlist)。
+
+本文将要介绍的是可以在 Taro3 中运行的 [react-window](https://github.com/bvaughn/react-window)。
+
+<!-- truncate -->
+
+## react-window 工作原理
+
+> [react-window](https://github.com/bvaughn/react-window) 是 [react-virtualized](https://github.com/bvaughn/react-virtualized) 作者重写的新作品，更小，更快，抽象程度更高。
+
+让我们先从一个简单的示例开始，对 `react-window` 有一个直观的认识：
+
+```tsx {4}
+import { FixedSizeList } from 'react-window'
+
+const Demo = () => (
+    <FixedSizeList height={300} itemCount={1000} itemSize={30}>
+        {({ index, style }) => <div style={style}>行号：{index + 1}</div>}
+    </FixedSizeList>
+)
+```
+
+import { FixedSizeList } from 'react-window'
+
+<FixedSizeList style={{ margin: 30, border: '1px solid silver' }}  height={300} itemCount={1000} itemSize={30}>
+    {({ index, style }) => <div style={{...style, paddingLeft: 10}}>行号：{index+1}</div>}
+</FixedSizeList>
+
+`FixedSizeList` 用于显示固定行高的列表，指定高度(`height`)确定视口，通过长度(`itemCount`)和行高(`itemSize`)计算出可见区域，每一行所需显示的内容通过 Render Props 由用户自己决定。
+
+上面的例子中，我们指定列表的高度为 300，行高为 30，虽然数据有 1000 条，实际渲染的只有 10 行。_（算上视口外预加载行实际超过 10 行）_
+
+`FixedSizeList` 本身渲染后的 DOM 结构共分两层：
+1. 外部滚动元素，相当于灰色边框部分。
+2. 内部占位元素，实际是一个占位区块。在上例中这个区块的高度是 30000，滚动时这个区块会整体向上移动，只露出 10 行。
+
+想象一下电梯的样子。
+
+## Taro3 整合
+
+:::important 运行时特殊需求
+由于 react-window 用到了 [requestAnimationFrame](https://github.com/bvaughn/react-window/blob/master/src/timer.js)，需要先对 taro 运行时打补丁，详见 [@tarojsx/polyfill](https://github.com/tarojsx/polyfill)。
+:::
+
+`FixedSizeList` 提供了两个属性 `outerElementType` 和 `innerElementType`，用于自定义**外部滚动元素**和**内部占位元素**，对照 `@tarojs/components` 很容易发现此处可以用 `<ScrollView>` 和 `<View>` 进行替换。
+
+其中 `innerElementType` 比较简单，直接替换即可，`innerElementType={View}`。
+
+对于 `outerElementType` 对应的 `<ScrollView>`，经过尝试发现要满足以下 3 个条件：
+1. 向下传递 `ref`
+2. `onScroll` 事件参数要具备 `{currentTarget: {clientWidth, clientHeight}}`
+3. 允许滚动。（因为 `<ScrollView>` 默认是不能滚动的。。。）
+
+有了这些条件，实现起来就简单了。
+
+```tsx {13,16,21} title="OuterScrollView.tsx"
+import React from 'react'
+import { ScrollView } from '@tarojs/components'
+import { ScrollViewProps } from '@tarojs/components/types/ScrollView'
+
+/**
+ * 用于 FixedSizeList 的外部滚动元素
+ */
+const OuterScrollView = React.forwardRef<any, ScrollViewProps>((props, ref) => {
+    const { style, onScroll, ...rest } = props
+
+    return (
+        <ScrollView
+            ref={ref}
+            style={style}
+            // 允许滚动
+            scrollY
+            onScroll={e => {
+                // 合成符合要求的滚动事件参数
+                onScroll({
+                    ...e,
+                    currentTarget: { ...e.detail, clientWidth: style.width, clientHeight: style.height },
+                })
+            }}
+            {...rest}
+        />
+    )
+})
+```
+
+```tsx title="FixedSizeList.tsx"
+import React from 'react'
+import { View } from '@tarojs/components'
+import { FixedSizeList as List, FixedSizeListProps } from 'react-window'
+
+import { OuterScrollView } from './OuterScrollView'
+
+/**
+ * FixedSizeList for Taro3
+ */
+export const FixedSizeList = React.forwardRef<List, FixedSizeListProps>((props, ref) => {
+    return (
+        <List ref={ref} outerElementType={OuterScrollView} innerElementType={View} {...props} />
+    )
+})
+```
+
+:::tip 提示
+封装好的组件详见 [@tarojsx/library](https://github.com/tarojsx/library)，事实上 Taro3 中的[虚拟列表](https://taro-docs.jd.com/taro/docs/next/virtual-list)正是基于这一原理实现的。
+:::
+
+## 真实案例
+
+在 taro3 项目中，安装两个依赖模块。
+
+`npm i @tarojsx/library @tarojsx/polyfill`
+
+更新 config/index.js 配置，目的是向运行环境中注入 `requestAnimationFrame`。
+
+```js {6-8} title="/config/index.js"
+const { TaroProvidePlugin } = require('@tarojsx/polyfill/dist/plugins')
+
+const config = {
+    mini: {
+        webpackChain(chain, webpack) {
+            chain
+                .plugin('taroProviderPlugin')
+                .use(TaroProvidePlugin)
+        }
+    }
+}
+```
+
+编写页面组件
+
+```tsx title="/src/pages/list.tsx"
+import React, { useMemo, useState, useEffect } from 'react'
+import Taro from '@tarojs/taro'
+import { View } from '@tarojs/components'
+import { FixedSizeList } from '@tarojsx/library/dist/react-window'
+
+export default () => {
+    const { windowWidth, windowHeight } = useMemo(() => Taro.getSystemInfoSync(), [])
+
+    const [data, setData] = useState<{ name: string }[]>([])
+
+    useEffect(() => {
+        (async () => {
+            const res = await Taro.request({
+                url: 'https://example.com/api/users'
+            })
+            setData(res.data)
+        })()
+    }, [])
+
+    return (
+        <View>
+            <FixedSizeList
+                width={windowWidth}
+                height={windowHeight}
+                itemCount={data.length}
+                itemSize={50}
+            >
+                {({ index, style }) => (
+                    <View key={index} style={style}>{data[index].name}</View>
+                )}
+            </FixedSizeList>
+        </View>
+    )
+}
+```
+
+## 总结
+
+虚拟列表本质上是在滚动时不断更新视口中的行，由于屏幕尺寸的限制，同时显示的行数不会太多，即使是 60FPS 的滚动对于 `React` 也没什么压力。不过在 `Taro3` 里，由于取代了 `ReactDOM`，UI 更新是通过小程序的 `setData` 实现的，在快速滚动虚拟列表时，`setData` 会以每秒 60 次的速度被调用，低端机型极易出现卡顿。如果对 `onScroll` 事件进行节流，又会造成列表更新不及时，带来用户感观上的延迟。
+
+本文简单的介绍了固定行高列表，事实上 [react-window](https://github.com/bvaughn/react-window) 还支持横向滚动的列表，以及横竖都可滚动的表格，使用方法和固定行高列表类似，此处不再重复。
+
+另外 [react-window](https://github.com/bvaughn/react-window) 还支持可变行高列表，因为小程序获取元素的宽高是异步操作，性能和准确性都无法保障，实际价值不大。
