@@ -52,7 +52,7 @@ module.exports = {
             links: [
                 {
                     to: 'docs/ui/README',
-                    activeBasePath: 'docs/ui',
+                    activeBasePath: 'docs/ui', // 以此开头的路径点亮
                     label: 'UI',
                     position: 'left',
                 },
@@ -92,6 +92,7 @@ module.exports = {
                 },
             ],
         },
+        sidebarCollapsible: false, // 侧边栏分类禁止折叠
         footer: {
             style: 'dark',
             links: [
@@ -138,7 +139,7 @@ module.exports = {
         },
         prism: {
             theme: require('prism-react-renderer/themes/github'),
-            darkTheme: require('prism-react-renderer/themes/vsDark'),
+            darkTheme: require('prism-react-renderer/themes/vsDark'), // 黑暗模式代码高亮主题
         },
     },
 }
