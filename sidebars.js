@@ -5,10 +5,11 @@ module.exports = {
     UI: ['ui/README', 'ui/docs/components/Avatar', 'ui/docs/components/Button'],
     Hooks: [
         'hooks/README',
+        'hooks/docs/taroHooks',
         {
             type: 'category',
             label: '基础',
-            items: ['hooks/docs/taroHooks', 'hooks/docs/useThrottleCallback'],
+            items: ['hooks/docs/useThrottleCallback'],
         },
         {
             type: 'category',
