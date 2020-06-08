@@ -2215,6 +2215,22 @@
     react-use "^15.1.0"
     tslib "^2.0.0"
 
+"@tarojsx/hooks@^0.13.1":
+  version "0.13.1"
+  resolved "https://registry.npm.taobao.org/@tarojsx/hooks/download/@tarojsx/hooks-0.13.1.tgz#e0c78600aa2fb9aa28df9a10c47582b87434ccee"
+  integrity sha1-4MeGAKovuaoo35oQxHWCuHQ0zO4=
+  dependencies:
+    react-use "^15.2.0"
+    tslib "^2.0.0"
+
+"@tarojsx/polyfill@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.npm.taobao.org/@tarojsx/polyfill/download/@tarojsx/polyfill-0.11.0.tgz#53aa8aadb0e29844de81862e46b89e5dbf51f06e"
+  integrity sha1-U6qKrbDimETegYYuRrieXb9R8G4=
+  dependencies:
+    intl "^1.2.5"
+    tslib "^2.0.0"
+
 "@tarojsx/ui@^0.11.0":
   version "0.11.0"
   resolved "https://registry.npm.taobao.org/@tarojsx/ui/download/@tarojsx/ui-0.11.0.tgz#52eee722038c7460fd9f6aa624dd42fda307150d"
@@ -6738,6 +6754,11 @@ fast-deep-equal@^3.1.1:
   resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
   integrity sha1-VFFFB3xQFJHjOxXsQIwpQ3bpSuQ=
 
+fast-deep-equal@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-3.1.3.tgz?cache=0&sync_timestamp=1591599675178&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffast-deep-equal%2Fdownload%2Ffast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
+  integrity sha1-On1WtVnWy8PrUSMlJE5hmmXGxSU=
+
 fast-glob@^2.0.2:
   version "2.2.7"
   resolved "https://registry.npm.taobao.org/fast-glob/download/fast-glob-2.2.7.tgz?cache=0&sync_timestamp=1582318304084&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffast-glob%2Fdownload%2Ffast-glob-2.2.7.tgz#6953857c3afa475fff92ee6015d52da70a4cd39d"
@@ -8529,6 +8550,11 @@ intersection-observer@^0.7.0:
   version "0.7.0"
   resolved "https://registry.npm.taobao.org/intersection-observer/download/intersection-observer-0.7.0.tgz#ee16bee978db53516ead2f0a8154b09b400bbdc9"
   integrity sha1-7ha+6XjbU1FurS8KgVSwm0ALvck=
+
+intl@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.npm.taobao.org/intl/download/intl-1.2.5.tgz#82244a2190c4e419f8371f5aa34daa3420e2abde"
+  integrity sha1-giRKIZDE5Bn4Nx9ao02qNCDiq94=
 
 into-stream@^3.1.0:
   version "3.1.0"
@@ -12914,6 +12940,26 @@ react-use@^15.1.0:
     "@xobotyi/scrollbar-width" "1.9.5"
     copy-to-clipboard "^3.2.0"
     fast-deep-equal "^3.1.1"
+    fast-shallow-equal "^1.0.0"
+    js-cookie "^2.2.1"
+    nano-css "^5.2.1"
+    react-universal-interface "^0.6.0"
+    resize-observer-polyfill "^1.5.1"
+    screenfull "^5.0.0"
+    set-harmonic-interval "^1.0.1"
+    throttle-debounce "^2.1.0"
+    ts-easing "^0.2.0"
+    tslib "^2.0.0"
+
+react-use@^15.2.0:
+  version "15.2.1"
+  resolved "https://registry.npm.taobao.org/react-use/download/react-use-15.2.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-use%2Fdownload%2Freact-use-15.2.1.tgz#37c9d7bf6eeb4c9b5c646bdb7fe6cb64fc0ee644"
+  integrity sha1-N8nXv27rTJtcZGvbf+bLZPwO5kQ=
+  dependencies:
+    "@types/js-cookie" "2.2.6"
+    "@xobotyi/scrollbar-width" "1.9.5"
+    copy-to-clipboard "^3.2.0"
+    fast-deep-equal "^3.1.3"
     fast-shallow-equal "^1.0.0"
     js-cookie "^2.2.1"
     nano-css "^5.2.1"

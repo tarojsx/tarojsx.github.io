@@ -37,6 +37,11 @@ module.exports = {
     plugins: [require.resolve('docusaurus-plugin-sass'), path.resolve(__dirname, 'docusaurus-plugin-tarojsx')],
     themes: [require.resolve('@docusaurus/theme-classic'), require.resolve('@docusaurus/theme-live-codeblock')],
     themeConfig: {
+        // announcementBar: {
+        //     id: 'github-star',
+        //     content:
+        //         '<span class="text-white">⭐️ 如果你喜欢 TaroX 项目，请给一个 Star <a target="_blank" rel="noopener noreferrer" href="https://github.com/tarojsx">GitHub</a>! ⭐️</span>',
+        // },
         navbar: {
             hideOnScroll: true,
             title: 'TaroX',
@@ -47,26 +52,31 @@ module.exports = {
             links: [
                 {
                     to: 'docs/ui/README',
+                    activeBasePath: 'docs/ui',
                     label: 'UI',
                     position: 'left',
                 },
                 {
                     to: 'docs/hooks/README',
+                    activeBasePath: 'docs/hooks',
                     label: 'Hooks',
                     position: 'left',
                 },
                 {
                     to: 'docs/library/README',
+                    activeBasePath: 'docs/library',
                     label: 'Library',
                     position: 'left',
                 },
                 {
                     to: 'docs/polyfill/README',
+                    activeBasePath: 'docs/polyfill',
                     label: 'Polyfill',
                     position: 'left',
                 },
                 {
                     to: 'docs/history/README',
+                    activeBasePath: 'docs/history',
                     label: 'History',
                     position: 'left',
                 },

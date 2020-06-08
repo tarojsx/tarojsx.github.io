@@ -30,7 +30,13 @@ module.exports = {
             items: ['hooks/docs/useDidShowAgain', 'hooks/docs/useLogger'],
         },
     ],
-    Library: [],
-    Polyfill: [],
-    History: [],
+    Library: [
+        'library/README',
+        'library/docs/react-window',
+        'library/docs/react-vtree',
+        'library/docs/react-spring',
+        'library/docs/react-use-gesture',
+    ],
+    Polyfill: ['polyfill/README'],
+    History: ['history/README'],
 }

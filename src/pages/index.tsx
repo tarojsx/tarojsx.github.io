@@ -8,32 +8,29 @@ import styles from './styles.module.css'
 
 const features = [
     {
-        title: <>Easy to Use</>,
-        imageUrl: 'img/undraw_docusaurus_mountain.svg',
+        title: <>拥抱 React</>,
+        imageUrl: 'img/undraw_react.svg',
         description: (
             <>
-                Docusaurus was designed from the ground up to be easily installed and used to get your website up and
-                running quickly.
+                探索 React 新技术在 Taro3 中的可行性，挖掘 Taro3 潜能。
             </>
         ),
     },
     {
-        title: <>Focus on What Matters</>,
-        imageUrl: 'img/undraw_docusaurus_tree.svg',
+        title: <>易于整合</>,
+        imageUrl: 'img/undraw_product_teardown.svg',
         description: (
             <>
-                Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into
-                the <code>docs</code> directory.
+                开箱即用，快速上手，屏蔽不必要的实现细节。
             </>
         ),
     },
     {
-        title: <>Powered by React</>,
-        imageUrl: 'img/undraw_docusaurus_react.svg',
+        title: <>持续构建</>,
+        imageUrl: 'img/undraw_building_blocks.svg',
         description: (
             <>
-                Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the
-                same header and footer.
+                不断发掘，持续更新；拥抱开源，欢迎参与提交代码，共同完善，共同提高。
             </>
         ),
     },
