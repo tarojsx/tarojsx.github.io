@@ -1,7 +1,13 @@
 const path = require('path')
 const child = require('child_process')
+const util = require('util')
 const docusaurus = require('@docusaurus/types')
 const webpack = require('webpack')
+
+const babelConfig = require('./babel.config')
+
+// @ts-ignore
+const log = (...args) => console.log(...args.map(arg => util.inspect(arg, { depth: null })))
 
 /**
  *
@@ -51,7 +57,6 @@ module.exports = function pluginSyncDocs(context, opts) {
         // },
 
         /**
-         *
          * @param {webpack.Configuration} config
          * @param {boolean} isServer
          * @param {docusaurus.ConfigureWebpackUtils} utils
@@ -62,38 +67,19 @@ module.exports = function pluginSyncDocs(context, opts) {
             // will be merged into the final config using webpack-merge;
             // If the returned value is a function, it will receive the config as the 1st argument and an isServer flag as the 2nd argument.
 
-            // console.log('configureWebpack', config)
+            config.devServer.open = false
 
-            // const babelLoader = getBabelLoader(isServer)
-            // babelLoader.options.presets.push([
-            //     'taro',
-            //     {
-            //         framework: 'react',
-            //         ts: true,
-            //     },
-            // ])
-            // console.log('babelLoader', babelLoader)
+            config.resolve.alias['@tarojs/components'] = path.resolve('tarojs-components.ts')
+            config.resolve.alias['@/ui'] = path.resolve(__dirname, 'src', 'ui')
 
-            // config.devServer = config.devServer || {}
-            // config.devServer.open = false
-            // return config
-            return {
-                // module: {
-                //     rules: [
-                //         {
-                //             test: /(\.mdx)$/,
-                //             use: [
-                //                 getCacheLoader(isServer),
-                //                 babelLoader,
-                //                 {
-                //                     loader: require.resolve('@docusaurus/mdx-loader'),
-                //                 },
-                //             ].filter(Boolean),
-                //         },
-                //     ],
-                // },
-                devServer: { open: false },
-            }
+            config.module.rules
+                .filter(({ test }) => test.source.includes('.mdx'))
+                .forEach(rule => {
+                    const babelLoader = rule.use.find(({ loader }) => loader.includes('babel-loader'))
+                    // log(babelLoader)
+                    babelLoader.options.presets = babelConfig.presets
+                    babelLoader.options.plugins.push(...babelConfig.plugins)
+                })
         },
 
         getPathsToWatch() {

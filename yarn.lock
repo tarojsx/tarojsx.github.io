@@ -2142,9 +2142,9 @@
   dependencies:
     loader-utils "^1.2.3"
 
-"@tarojs/taro@3.0.0-rc.3":
+"@tarojs/taro@3.0.0-rc.3", "@tarojs/taro@^3.0.0-rc.3":
   version "3.0.0-rc.3"
-  resolved "https://registry.npm.taobao.org/@tarojs/taro/download/@tarojs/taro-3.0.0-rc.3.tgz?cache=0&sync_timestamp=1590765234625&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40tarojs%2Ftaro%2Fdownload%2F%40tarojs%2Ftaro-3.0.0-rc.3.tgz#f5690bcd865f0383962bcdd292410cf8abe7872e"
+  resolved "https://registry.npm.taobao.org/@tarojs/taro/download/@tarojs/taro-3.0.0-rc.3.tgz?cache=0&sync_timestamp=1591260686701&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40tarojs%2Ftaro%2Fdownload%2F%40tarojs%2Ftaro-3.0.0-rc.3.tgz#f5690bcd865f0383962bcdd292410cf8abe7872e"
   integrity sha1-9WkLzYZfA4OWK83SkkEM+Kvnhy4=
   dependencies:
     "@tarojs/api" "3.0.0-rc.3"
@@ -2215,10 +2215,10 @@
     react-use "^15.1.0"
     tslib "^2.0.0"
 
-"@tarojsx/hooks@^0.13.1":
-  version "0.13.1"
-  resolved "https://registry.npm.taobao.org/@tarojsx/hooks/download/@tarojsx/hooks-0.13.1.tgz#e0c78600aa2fb9aa28df9a10c47582b87434ccee"
-  integrity sha1-4MeGAKovuaoo35oQxHWCuHQ0zO4=
+"@tarojsx/hooks@^0.13.2":
+  version "0.13.2"
+  resolved "https://registry.npm.taobao.org/@tarojsx/hooks/download/@tarojsx/hooks-0.13.2.tgz#512e8b459c786b05d11af362a864be61b2838554"
+  integrity sha1-US6LRZx4awXRGvNiqGS+YbKDhVQ=
   dependencies:
     react-use "^15.2.0"
     tslib "^2.0.0"
@@ -2347,10 +2347,23 @@
   resolved "https://registry.npm.taobao.org/@types/parse-json/download/@types/parse-json-4.0.0.tgz?cache=0&sync_timestamp=1588201631592&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fparse-json%2Fdownload%2F%40types%2Fparse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha1-L4u0QUNNFjs1+4/9zNcTiSf/uMA=
 
+"@types/prop-types@*":
+  version "15.7.3"
+  resolved "https://registry.npm.taobao.org/@types/prop-types/download/@types/prop-types-15.7.3.tgz?cache=0&sync_timestamp=1588201545972&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fprop-types%2Fdownload%2F%40types%2Fprop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
+  integrity sha1-KrDV2i5YFflLC51LldHl8kOrLKc=
+
 "@types/q@^1.5.1":
   version "1.5.2"
   resolved "https://registry.npm.taobao.org/@types/q/download/@types/q-1.5.2.tgz?cache=0&sync_timestamp=1580864309201&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fq%2Fdownload%2F%40types%2Fq-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha1-aQoUdbhPKohP0HzXl8APXzE1bqg=
+
+"@types/react@^16.9.35":
+  version "16.9.35"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.35.tgz?cache=0&sync_timestamp=1589187921077&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.35.tgz#a0830d172e8aadd9bd41709ba2281a3124bbd368"
+  integrity sha1-oIMNFy6Krdm9QXCboigaMSS702g=
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
 
 "@types/request@^2.48.1":
   version "2.48.5"
@@ -3374,6 +3387,14 @@ babel-plugin-extract-import-names@^1.6.5:
   integrity sha1-tbJjmpu+iA8kM3NvHKNcCgjYUYo=
   dependencies:
     "@babel/helper-plugin-utils" "7.8.3"
+
+babel-plugin-import@^1.13.0:
+  version "1.13.0"
+  resolved "https://registry.npm.taobao.org/babel-plugin-import/download/babel-plugin-import-1.13.0.tgz#c532fd533df9db53b47d4d4db3676090fc5c07a5"
+  integrity sha1-xTL9Uz3521O0fU1Ns2dgkPxcB6U=
+  dependencies:
+    "@babel/helper-module-imports" "^7.0.0"
+    "@babel/runtime" "^7.0.0"
 
 babel-plugin-macros@^2.0.0:
   version "2.8.0"
@@ -5367,7 +5388,7 @@ cssstyle@^2.0.0:
   dependencies:
     cssom "~0.3.6"
 
-csstype@^2.5.5:
+csstype@^2.2.0, csstype@^2.5.5:
   version "2.6.10"
   resolved "https://registry.npm.taobao.org/csstype/download/csstype-2.6.10.tgz?cache=0&sync_timestamp=1589682351499&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcsstype%2Fdownload%2Fcsstype-2.6.10.tgz#e63af50e66d7c266edb6b32909cfd0aabe03928b"
   integrity sha1-5jr1DmbXwmbttrMpCc/Qqr4Dkos=

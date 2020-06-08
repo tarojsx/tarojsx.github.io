@@ -1,0 +1,30 @@
+@import './devices';
+
+.phone {
+    position: fixed;
+    top: 200px;
+    right: 10px;
+    z-index: var(--ifm-z-index-fixed);
+
+    .marvel-device {
+        &.iphone-x {
+            .screen {
+                width: 200%;
+                height: 200%;
+                border-radius: 80px;
+                transform: scale(0.5) translate(-50%, -50%);
+
+                .navbar {
+                    margin-top: 20px;
+                    width: 750px;
+                    height: 135px;
+                }
+
+                .content {
+                    overflow-y: scroll;
+                    font-size: 32px;
+                }
+            }
+        }
+    }
+}

@@ -2,7 +2,10 @@ module.exports = {
     Intro: {
         '关于 TaroX': ['index'],
     },
-    UI: ['ui/README', 'ui/docs/components/Avatar', 'ui/docs/components/Button'],
+    UI: ['ui/README',
+    'ui/docs/components/ActivityIndicator',
+    'ui/docs/components/Avatar',
+    'ui/docs/components/Button'],
     Hooks: [
         'hooks/README',
         'hooks/docs/taroHooks',
