@@ -69,7 +69,7 @@ module.exports = function pluginSyncDocs(context, opts) {
 
             config.devServer.open = false
 
-            config.resolve.alias['@tarojs/components'] = path.resolve('tarojs-components.ts')
+            config.resolve.alias['@tarojs/components'] = path.resolve('docusaurus-taro-runtime.ts')
             config.resolve.alias['@/ui'] = path.resolve(__dirname, 'src', 'ui')
 
             config.module.rules
@@ -80,6 +80,8 @@ module.exports = function pluginSyncDocs(context, opts) {
                     babelLoader.options.presets = babelConfig.presets
                     babelLoader.options.plugins.push(...babelConfig.plugins)
                 })
+
+            config.plugins.push(new webpack.EnvironmentPlugin({ TARO_ENV: 'h5' }))
         },
 
         getPathsToWatch() {

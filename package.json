@@ -24,6 +24,7 @@
         "docusaurus-plugin-sass": "^0.1.8",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
+        "react-universal-interface": "^0.6.2",
         "react-window": "^1.8.5",
         "taro-ui": "^3.0.0-alpha.2"
     },
@@ -32,6 +33,7 @@
         "@docusaurus/init": "^2.0.0-alpha.56",
         "@tarojs/cli": "^3.0.0-rc.3",
         "@tarojs/mini-runner": "^3.0.0-rc.3",
+        "@types/classnames": "^2.2.10",
         "@types/execa": "^2.0.0",
         "@types/react": "^16.9.35",
         "@types/webpack": "^4.41.17",

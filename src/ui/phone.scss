@@ -12,7 +12,8 @@
                 width: 200%;
                 height: 200%;
                 border-radius: 80px;
-                transform: scale(0.5) translate(-50%, -50%);
+                transform-origin: top left;
+                transform: scale(0.5);
 
                 .navbar {
                     margin-top: 20px;

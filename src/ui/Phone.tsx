@@ -1,11 +1,19 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
 import classNames from 'classnames'
+import { render, UniversalProps } from 'react-universal-interface'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import './phone.scss'
 
-export const Phone: React.FC = ({ children }) => {
+interface PhoneProps<R = { isPhone?: boolean }> extends UniversalProps<R> {
+    className?: string
+    style?: React.CSSProperties
+}
+
+export const Phone: React.FC<PhoneProps> = props => {
+    const { className, style } = props
+
     return (
-        <div className="phone">
+        <div className={classNames('phone', className)} style={style}>
             <div className="marvel-device iphone-x">
                 <div className="notch">
                     <div className="camera"></div>
@@ -24,7 +32,7 @@ export const Phone: React.FC = ({ children }) => {
                 <div className="inner-shadow"></div>
                 <div className="screen">
                     <img className="navbar" src={useBaseUrl('img/miniprogram-navigation-bar.svg')} />
-                    <div className="content">{children}</div>
+                    <div className="content">{render(props, { isPhone: true })}</div>
                 </div>
             </div>
         </div>

@@ -1,18 +1,20 @@
 .ui {
+    transform-origin: top left;
+    transform: scale(0.5);
     z-index: var(--ifm-z-index-dropdown);
     max-width: 375px;
+    font-size: 32px;
 
-    .block {
-        position: relative;
+    &.block {
         margin: var(--ifm-spacing-vertical) var(--ifm-spacing-horizontal);
-        padding: calc(var(--ifm-spacing-vertical) * 2) calc(var(--ifm-spacing-horizontal) * 2);
+        // padding: calc(var(--ifm-spacing-vertical) * 2) calc(var(--ifm-spacing-horizontal) * 2);
         // boxShadow: var(--ifm-global-shadow-lw);
+        min-height: 50px;
     }
 
     .content {
+        position: relative;
         width: 200%;
         height: 200%;
-        transform: scale(0.5) translate(-50%, -50%);
-        font-size: 32px;
     }
 }
