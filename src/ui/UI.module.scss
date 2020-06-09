@@ -1,6 +1,4 @@
 .ui {
-    transform-origin: top left;
-    transform: scale(0.5);
     z-index: var(--ifm-z-index-dropdown);
     max-width: 375px;
     font-size: 32px;
@@ -14,6 +12,8 @@
 
     .content {
         position: relative;
+        transform-origin: top left;
+        transform: scale(0.5);
         width: 200%;
         height: 200%;
     }
