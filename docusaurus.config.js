@@ -29,7 +29,7 @@ module.exports = {
                     // editUrl: 'https://github.com/tarojsx/tarojsx.github.io/edit/master/block',
                 },
                 theme: {
-                    customCss: require.resolve('./src/css/custom.css'),
+                    customCss: require.resolve('./src/css/custom.scss'),
                 },
             },
         ],
