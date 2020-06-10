@@ -2,10 +2,12 @@ import React from 'react'
 import classNames from 'classnames'
 import { render, UniversalProps } from 'react-universal-interface'
 
-import { Phone } from './Phone'
+import { Phone, PhoneProps, PhoneRenderProps } from './Phone'
 import styles from './UI.module.scss'
 
-interface UIProps<R = { isBlock?: boolean; isPhone?: boolean }> extends UniversalProps<R> {
+type UIRenderProps = { isBlock?: boolean } & PhoneRenderProps
+
+interface UIProps<R = UIRenderProps> extends UniversalProps<R>, PhoneProps<R> {
     className?: string
     style?: React.CSSProperties
     block?: boolean
