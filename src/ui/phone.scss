@@ -15,18 +15,10 @@
                 transform-origin: top left;
                 transform: scale(0.5);
 
-                .navigation-bar {
-                    margin: 25px;
-                    width: 700px;
-                    // height: 135px;
-                }
-
-                .navigation-bar-title {
-                    margin-top: -80px;
+                .miniprogram-navigation {
+                    width: 750px;
+                    height: 176px;
                     user-select: none;
-                    color: #000;
-                    text-align: center;
-                    font-size: 32px;
                 }
 
                 .content {
