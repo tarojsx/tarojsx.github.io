@@ -6,17 +6,17 @@
 <meta name="generator" content="Docusaurus v2.0.0-alpha.58">
 <title data-react-helmet="true">useDidShowAgain | TaroX</title><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" property="og:title" content="useDidShowAgain | TaroX"><meta data-react-helmet="true" name="description" content="页面再次显示时的回调"><meta data-react-helmet="true" property="og:description" content="页面再次显示时的回调"><meta data-react-helmet="true" property="og:url" content="https://tarojsx.github.io/docs/hooks/docs/useDidShowAgain"><link data-react-helmet="true" rel="shortcut icon" href="/img/favicon.ico"><link data-react-helmet="true" rel="canonical" href="https://tarojsx.github.io/docs/hooks/docs/useDidShowAgain"><link rel="stylesheet" href="/styles.cfb67de8.css">
 <link rel="stylesheet" href="/main.2901c7f1.css">
-<link rel="preload" href="/styles.75b1b04f.js" as="script">
-<link rel="preload" href="/runtime~main.f3b2d3be.js" as="script">
-<link rel="preload" href="/main.32926754.js" as="script">
-<link rel="preload" href="/1.d2c7e785.js" as="script">
-<link rel="preload" href="/2.2fc780ff.js" as="script">
-<link rel="preload" href="/4.003cc5a7.js" as="script">
-<link rel="preload" href="/1be78505.8dec654c.js" as="script">
-<link rel="preload" href="/179.bba7133d.js" as="script">
-<link rel="preload" href="/20ac7829.d8cc5c49.js" as="script">
-<link rel="preload" href="/17896441.5999f155.js" as="script">
-<link rel="preload" href="/c6eac092.e97afbb2.js" as="script">
+<link rel="preload" href="/styles.66a3d5bb.js" as="script">
+<link rel="preload" href="/runtime~main.1c5bb8c2.js" as="script">
+<link rel="preload" href="/main.b7a70319.js" as="script">
+<link rel="preload" href="/2.71e4e0d3.js" as="script">
+<link rel="preload" href="/3.599672f9.js" as="script">
+<link rel="preload" href="/4.1cdd9878.js" as="script">
+<link rel="preload" href="/1be78505.01674ec5.js" as="script">
+<link rel="preload" href="/186.47d19e34.js" as="script">
+<link rel="preload" href="/20ac7829.f785830d.js" as="script">
+<link rel="preload" href="/17896441.2bfaedee.js" as="script">
+<link rel="preload" href="/c6eac092.5fe9d451.js" as="script">
 </head>
 <body>
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=window.matchMedia("(prefers-color-scheme: dark)"),n=function(){var t=null;try{t=localStorage.getItem("theme")}catch(t){}return t}();null!==n?t(n):e.matches&&t("dark")}()</script>
@@ -26,16 +26,16 @@
 </span></div><div class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// count 为页面显示计数, 从 1 开始.</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">const</span><span class="token plain"> count </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">useDidShowAgain</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">=&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain">        console</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">log</span><span class="token punctuation" style="color:#393A34">(</span><span class="token string" style="color:#e3116c">&#x27;show again&#x27;</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain">    console</span><span class="token punctuation" style="color:#393A34">.</span><span class="token function" style="color:#d73a49">log</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">count</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block">
 </span></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">/* 首次打开页面 */</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">// show</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">// 1</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block">
 </span></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">/* 进入其他页面后返回 */</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">// show</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">// show again</span><span class="token plain"></span></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token comment" style="color:#999988;font-style:italic">// 2</span></div></div></div></div></div><h2><a aria-hidden="true" tabindex="-1" class="anchor" id="参考"></a>参考<a aria-hidden="true" tabindex="-1" class="hash-link" href="#参考" title="Direct link to heading">#</a></h2><div class="mdxCodeBlock_iHAB"><div class="codeBlockContent_32p_"><button type="button" aria-label="Copy code to clipboard" class="copyButton_1BYj">Copy</button><div tabindex="0" class="prism-code language-ts codeBlock_19pQ"><div class="codeBlockLines_2n9r" style="color:#393A34;background-color:#f6f8fa"><div class="token-line" style="color:#393A34"><span class="token function" style="color:#d73a49">useDidShowAgain</span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">fn</span><span class="token punctuation" style="color:#393A34">)</span></div></div></div></div></div></div></article><div class="margin-vert--lg"><nav class="pagination-nav" aria-label="Blog list page navigation"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/docs/hooks/docs/usePullDownRefreshing"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">« usePullDownRefreshing</div></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/docs/hooks/docs/useLogger"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">useLogger »</div></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_TbNY"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#用法" class="table-of-contents__link">用法</a></li><li><a href="#参考" class="table-of-contents__link">参考</a></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="row footer__links"><div class="col footer__col"><h4 class="footer__title">文档</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" href="/docs/ui/README">重新发明的 UI</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/hooks/README">必备 Hooks</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/library/README">第三方 Library</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/polyfill/README">运行时补丁 Polyfill</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/history/README">History API</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">社区</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" href="/blog">博客</a></li><li class="footer__item"><a href="https://github.com/tarojsx" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">资源</h4><ul class="footer__items"><li class="footer__item"><a href="https://tarojsx.gitee.io" target="_blank" rel="noopener noreferrer" class="footer__link-item">国内镜像站点 🇨🇳</a></li><li class="footer__item"><a href="https://tarojsx.github.io" target="_blank" rel="noopener noreferrer" class="footer__link-item">海外站点 🌏</a></li></ul></div></div><div class="text--center"><div>Copyright © 2019-2020 TaroX org. Built with Docusaurus.</div></div></div></footer></div>
-<script src="/styles.75b1b04f.js"></script>
-<script src="/runtime~main.f3b2d3be.js"></script>
-<script src="/main.32926754.js"></script>
-<script src="/1.d2c7e785.js"></script>
-<script src="/2.2fc780ff.js"></script>
-<script src="/4.003cc5a7.js"></script>
-<script src="/1be78505.8dec654c.js"></script>
-<script src="/179.bba7133d.js"></script>
-<script src="/20ac7829.d8cc5c49.js"></script>
-<script src="/17896441.5999f155.js"></script>
-<script src="/c6eac092.e97afbb2.js"></script>
+<script src="/styles.66a3d5bb.js"></script>
+<script src="/runtime~main.1c5bb8c2.js"></script>
+<script src="/main.b7a70319.js"></script>
+<script src="/2.71e4e0d3.js"></script>
+<script src="/3.599672f9.js"></script>
+<script src="/4.1cdd9878.js"></script>
+<script src="/1be78505.01674ec5.js"></script>
+<script src="/186.47d19e34.js"></script>
+<script src="/20ac7829.f785830d.js"></script>
+<script src="/17896441.2bfaedee.js"></script>
+<script src="/c6eac092.5fe9d451.js"></script>
 </body>
 </html>
