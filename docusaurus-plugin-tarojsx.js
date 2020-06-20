@@ -4,8 +4,6 @@ const util = require('util')
 const docusaurus = require('@docusaurus/types')
 const webpack = require('webpack')
 
-const babelConfig = require('./babel.config')
-
 // @ts-ignore
 const log = (...args) => console.log(...args.map(arg => util.inspect(arg, { depth: null })))
 
@@ -69,19 +67,16 @@ module.exports = function pluginSyncDocs(context, opts) {
 
             config.devServer.open = false
 
-            config.resolve.alias['@tarojs/components'] = path.resolve('docusaurus-taro-runtime.ts')
+            if (!isServer) {
+                config.entry.unshift(path.resolve(__dirname, 'docusaurus-taro-h5.ts'))
+            } else {
+                config.entry.main = [path.resolve(__dirname, 'docusaurus-taro-h5.ts'), config.entry.main]
+            }
+
+            config.resolve.alias['@tarojs/components$'] = '@tarojs/components/h5/react'
             config.resolve.alias['@/ui'] = path.resolve(__dirname, 'src', 'ui')
 
-            config.module.rules
-                .filter(({ test }) => test.source.includes('.mdx'))
-                .forEach(rule => {
-                    const babelLoader = rule.use.find(({ loader }) => loader.includes('babel-loader'))
-                    // log(babelLoader)
-                    babelLoader.options.presets = babelConfig.presets
-                    babelLoader.options.plugins = [...(babelLoader.options.plugins || []), ...babelConfig.plugins]
-                })
-
-            config.plugins.push(new webpack.EnvironmentPlugin({ TARO_ENV: 'h5' }))
+            config.plugins.push(new webpack.EnvironmentPlugin({ TARO_ENV: 'h5', FRAMEWORK: 'react' }))
         },
 
         getPathsToWatch() {
