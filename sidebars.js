@@ -16,16 +16,19 @@ module.exports = {
         {
             type: 'category',
             label: '基础',
+            collapsed: false,
             items: ['hooks/docs/useThrottleCallback'],
         },
         {
             type: 'category',
             label: '环境',
+            collapsed: false,
             items: ['hooks/docs/useRouterParams'],
         },
         {
             type: 'category',
             label: '界面',
+            collapsed: false,
             items: [
                 'hooks/docs/useNavigationBar',
                 'hooks/docs/useNavigationBarTitle',
@@ -35,6 +38,7 @@ module.exports = {
         {
             type: 'category',
             label: '生命周期',
+            collapsed: false,
             items: ['hooks/docs/useDidShowAgain', 'hooks/docs/useLogger'],
         },
     ],

@@ -92,7 +92,7 @@ module.exports = {
                 },
             ],
         },
-        sidebarCollapsible: false, // 侧边栏分类禁止折叠
+        // sidebarCollapsible: false, // 侧边栏分类禁止折叠
         footer: {
             style: 'dark',
             links: [
@@ -138,12 +138,12 @@ module.exports = {
                     title: '资源',
                     items: [
                         {
-                            label: '海外站点 🛰',
-                            href: 'https://tarojsx.github.io',
-                        },
-                        {
                             label: '国内镜像站点 🇨🇳',
                             href: 'https://tarojsx.gitee.io',
+                        },
+                        {
+                            label: '海外站点 🌏',
+                            href: 'https://tarojsx.github.io',
                         },
                     ],
                 },
