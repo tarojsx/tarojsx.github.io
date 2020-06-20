@@ -9,6 +9,12 @@ module.exports = {
         'ui/docs/components/Badge',
         'ui/docs/components/Button',
         'ui/docs/components/List',
+        'ui/docs/components/InputNumber',
+        'ui/docs/components/Progress',
+        // 'ui/docs/components/SearchBar',
+        'ui/docs/components/Steps',
+        'ui/docs/components/TabBar',
+        'ui/docs/components/Tag',
     ],
     Hooks: [
         'hooks/README',
