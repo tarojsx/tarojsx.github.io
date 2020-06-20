@@ -78,7 +78,7 @@ module.exports = function pluginSyncDocs(context, opts) {
                     const babelLoader = rule.use.find(({ loader }) => loader.includes('babel-loader'))
                     // log(babelLoader)
                     babelLoader.options.presets = babelConfig.presets
-                    babelLoader.options.plugins.push(...babelConfig.plugins)
+                    babelLoader.options.plugins = [...(babelLoader.options.plugins || []), ...babelConfig.plugins]
                 })
 
             config.plugins.push(new webpack.EnvironmentPlugin({ TARO_ENV: 'h5' }))

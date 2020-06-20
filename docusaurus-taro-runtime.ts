@@ -6,7 +6,7 @@ const designWidth = 375
 const pxTransformConfig = {
     designWidth,
     deviceRatio: {
-        375: 1 / 2,
+        375: 4 / 2,
         640: 2.34 / 2,
         750: 2 / 2,
         828: 1.81 / 2,
