@@ -366,6 +366,7 @@ const Fun = () => {
 function Demo() {
     // 打印日志
     const log = msg => {
+        if (typeof document === 'undefined') return
         const logger = document.getElementById('useEffectDemoLogger1')
         if (logger) logger.innerText += '\n' + msg
     }
