@@ -1,0 +1,183 @@
+---
+id: 2020-06-24-react-on-a-timeline
+title: React 时间简史
+author: Colder
+author_url: https://github.com/cncolder
+author_image_url: https://avatars1.githubusercontent.com/u/127009
+tags: [JavaScript, AJAX, Framework, React]
+---
+
+![Frameworks](/img/undraw_JavaScript_frameworks.svg)
+
+React 的出现为前端构建友好的用户界面提供了广阔的机遇。
+
+为了能更好的理解 React，让我们回顾一下前端的发展历程。
+
+<!-- truncate -->
+
+## 索引
+
+-   **React 时间简史**
+-   [什么是 React？](./2020-06-25-what-is-react)
+
+## JavaScript 诞生记
+
+![Static website](/img/undraw_static_website.svg)
+
+浏览器作为人们每天都会用到的工具，因为太过熟悉，以致于忘了它当初的作用。浏览器原本被设计成一款“阅读器”软件，它的目的是让人们可以阅读 HTML 文档（一种比纯文字更丰富的格式），更多的时候被用于加载远端的文档。初代的浏览器只要做好一件事：文字排版，就像这样<https://kristopolous.github.io/BOOTSTRA.386>。
+
+曾经的 Web 服务器，只是把保存在硬盘上的 HTML 文档输出给浏览器，这个过程是单向的，仅此而已。
+
+直到有一天 `<form>` 表单出现了，此前的单向传输被打破，浏览器不再单纯的只是阅读，而是允许用户提交内容，服务器接收内容后引导浏览器跳转到一个新的页面展示提交的结果。这个新的页面可能是后端动态产生的，因此催生出了动态网站，内容不再是写死的静态 HTML 文件，而是根据数据拼接而成的。
+
+技术总是在不断探索中前进的，既然服务器可以动态产生内容，那浏览器为什么不能动态修改内容呢？于是就有了 [Eich 花 10 天写出 JavaScript](http://speakingjs.com/es5/ch04.html) 的故事，当年的另一个选择是嵌入 Java，可是 Java 太慢了。有了 JavaScript 只是个开始，只能做算术题的脚本语言显然没什么用，浏览器需要向 JavaScript 开放一些 [API](https://developer.mozilla.org/zh-CN/docs/Web/API/Document_Object_Model)，这样 JavaScript 才能真正做点什么，例如验证用户在表单里输入的电话号码必须带区号。
+
+```html title="摘自某个比我们年纪还大的网站"
+<form onsubmit="javascript: alert('提交成功！');">
+    <button type="submit">提交</button>
+</form>
+```
+
+此时的 JavaScript 只是网站管理员随手写的一些脚本，甚至不能算作编程语言，因为它能做的事情还是太少了，应付一些简单的用户交互，也有人尝试着实现一些动画效果，就像这样（**护眼警告**）<http://divshot.github.com/geo-bootstrap>。
+
+> 如果说此时的服务端是打地基盖房子的泥水匠，那 JavaScript 就像个木匠，安窗户，安门板。
+
+## JavaScript 蜕变之路
+
+![Internet](/img/undraw_just_browsing.svg)
+
+作为 JavaScript 的宿主 —— 浏览器，它的作用是下载网络资源。
+
+> JavaScript 深思片刻说：“你行，为什么我不行？”
+
+于是催生出 XMLHttpRequest，这个在今天看起来名字有点怪异的技术，因为它的发明者（微软）通过它传输 XML 文件。不久后出现了 AJAX（异步的 JavaScript 与 XML 技术） 这一概念。
+
+```js title="读取 HTML 片段插入到页面中"
+var xhr = new XMLHttpRequest()
+xhr.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        document.getElementById('demo').innerHTML = xhr.responseText
+    }
+}
+// 注意第 3 个参数 `true`，很多初学者梦寐以求的同步读取，网速太慢浏览器会失去响应。
+xhr.open('GET', '一个网址，返回文本或 HTML', true)
+xhr.send()
+```
+
+AJAX 的出现使得 JavaScript 脱胎换骨，一夜走红，人们开始重新审视这个 Script girl。动态网站现在只需要获取一小块数据，修改网页里的部分内容，就能把新的结果展示在用户面前，服务器的压力减轻了，用户体验也得到了质的飞跃，这个时代的巅峰之作是 Google 的 Gmail，一个不用刷新页面就能收发邮件的网站“应用”。
+
+> 世界上最遥远的距离不是爱与恨，而是我已升级 Chrome，你却还在用 IE。
+
+随着技术的不断发展，人们很快发现阻碍 JavaScript 发展的拌脚石竟然是孵化它的浏览器，此时的网站管理员手里都或多或少的保存着一份 JavaScript 代码清单，里面有关于不同品牌浏览器的兼容代码，缺乏经验的人会写出只能在 IE 里运行的代码，直到 jQuery 的出现才结束了这场灾难。
+
+jQuery 是一把瑞士军刀，日常所需的功能它都有提供，从 DOM 维护，到 class 切换，从数据获取，到事件监听，一把唆。此时的网站变的与以往大不相同，浏览器只要从服务器上下载一份 .js 文件放进一个空白页面里，jQuery 就可以轻松的从 0 开始读取数据其他加载其他 .js .css 文件并组装出一个完整的网站，从此诞生了一种新的职业：**Web 前端**。
+
+Web 前端可以独挡一面，只要有基础（Page）和材料（Data），就可以打造出一款游戏。
+
+> 此时的服务端只要提供砂子、砖和水泥，剩下的事情就都交给 jQuery 这个工头以及一众小弟吧。
+
+## Web 框架的由来
+
+![Models and Views](/img/undraw_user_flow.svg)
+
+绝大部分网站主要是用于数据展示和交互，展示就是把已有的数据用 HTML 标签组织起来放在指定的位置，交互则是对用户操作做出响应，修改数据并维护 DOM 结构，页面经过一系列交互不断调整，状态也会不断的更新，如果这个过程比较复杂，多次操作后，由于事件和网络的延迟，页面会进入一种未知状态，类似薛定谔的猫，_“我要插入的位置准备好了吗？”_
+
+```js title="按钮你准备好了吗？"
+$('button.continue').html('下一步...')
+```
+
+为了解决这一问题，需要建立从数据 (Models) 到界面 (Views) 之间的稳定映射关系，同样的数据总会显示成同样的界面，而不是随着数据变化不停的操弄界面（迟早会被玩坏）。
+
+```js title="假设有一份数据"
+var data = ['React Hook 最佳实践', 'React 16.x 的规划', 'React Profiler 介绍']
+```
+
+```js title="需要渲染成这样"
+<ul>
+    <li>React Hook 最佳实践</li>
+    <li>React 16.x 的规划</li>
+    <li>React Profiler 介绍</li>
+</ul>
+```
+
+这种关系是稳定的，不管数据有多少，每当数据变化时，我们只需要再生成一次对应的界面替换掉就行了，生成的过程可以是简单的字符串拼接，也可以用模板，事实上 PHP 就是靠着模板引擎打出一片天地。区别是前端可以有选择的更新界面，而不是每次都把一切推倒重来。
+
+这一领域的鼻祖是 [Backbone](https://backbonejs.org)，大名鼎鼎的 TodoMVC 也得给他老人家[留个位子](https://github.com/tastejs/todomvc/tree/master/examples/backbone)。
+
+> 前端就是把后端做的工作搬到浏览器里，还说不是来抢饭碗的！
+
+## Facebook 构建 React
+
+![Facebook](/img/undraw_code_review.svg)
+
+时间回到 2011 年，Facebook 开发者在代码维护上遇到问题，他们的广告应用不断增加新特性，同时又要保证速度（时间就是金钱），项目组成员越来越多，开发效率却越来越差，项目变得难以维护，界面面临如何处理级联更新的巨大难题，甚至威胁到了主程序的性能。
+
+为了解决这一系列问题，2011 年 7 月 11 日，Jordan Walke 构建了一个原型 [FaxJs](https://github.com/jordwalke/FaxJs)（React 的乳名），有人认为这一天是 React 的生日。
+
+> 如果你碰到为难你的 HR，不妨反问他一句：“你知道 React 的乳名吗？”
+
+2013 年 5 月 29 日，在 JS Conf（JavaScript 开发者大会）上，Jordan Walke 首次对外公开了 React。_有趣的是：在场听众普遍认为这是技术上的倒退。_
+
+```jsx title="最早的 React Hello World"
+var Hello = React.createClass({
+    render: function() {
+        return <div>Hello {this.props.name}</div>
+    },
+})
+
+React.render(<Hello name="World" />, document.body)
+```
+
+不仔细看可能看不出区别：
+
+1. 没有 class 组件，因为 JavaScript 还没有 class，也没有 Babel 帮忙编译。
+2. 没有 ReactDOM，最初二者是在一个包里的。
+3. 值得一提的是第一版 React 就已经具备 JSX 了。
+
+## Facebook 为什么要构建 React？
+
+![Frameworks](/img/undraw_JavaScript_frameworks.svg)
+
+**同样是从数据到界面，Facebook 为什么要构建 React？它又有哪些特别之处呢？**
+
+### React 不是一个 MVC 框架。
+
+是的！你没有看错。在那个类 Backbone 的 MVC 框架大行其道的年代，React 居然站出来说我不是 MVC 框架。
+
+> React 是一个用于构建可组合用户界面的库。
+
+对于用户来说，一个 React Web 项目，唯一可见的与 DOM 相关的代码只有一行：
+
+```js title="react-dom 把 React 组件嵌入 DOM"
+ReactDOM.render(app, document.getElementById('root'))
+```
+
+而这仅有的一行代码本质上也不是由 React 完成的。
+
+React 所做的工作是用 JavaScript 描述数据 "M" 和界面 "V" 之间的关系。
+
+`Component = (Data) => <View />`
+
+### React 不使用模板。
+
+React 使用 JavaScript 来写界面，即使 JSX 与 HTML 很相似，但本质上 JSX 最终会编译成 JavaScript。
+
+再强大的 HTML 模板，再复杂的指令，对比 JavaScript 来说也是个弟弟。
+
+`render` 返回的数据既不是一串字符串也不是一个 DOM 节点 —— 而是一种表示 DOM 应该是什么样子的轻量化描述。
+
+### HTML 只是开始。
+
+React 不使用模板拼接 HTML，所以 React 可以做的事情不仅限于浏览器内。
+
+-   通过 `react-native` 驱动手机底层视图。
+-   在[服务器上](https://nextjs.org)提前渲染以获得更好的性能。
+-   开发[命令行](https://github.com/vadimdemedes/ink)程序。
+-   使用 React 控制音乐喷泉。
+-   ...
+
+---
+
+是的，只是一个开始，接下来请思考一下： [什么是 React？](./2020-06-25-what-is-react)
+
+[the-history-of-react-js-on-a-timeline]: https://blog.risingstack.com/the-history-of-react-js-on-a-timeline
