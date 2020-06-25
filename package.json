@@ -23,6 +23,7 @@
         "classnames": "^2.2.6",
         "dayjs": "^1.8.28",
         "docusaurus-plugin-sass": "^0.1.9",
+        "gitalk": "^1.6.2",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-universal-interface": "^0.6.2",
