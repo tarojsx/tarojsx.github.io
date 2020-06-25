@@ -99,11 +99,11 @@ interface GitalkOptions {
     enableHotKey?: boolean
 }
 
-interface GitalkCommentProps extends Pick<GitalkOptions, 'id'> {}
+interface GitalkCommentProps extends Pick<GitalkOptions, 'id' | 'title'> {}
 
 const GitalkComponent: React.FC<{ options: GitalkOptions }> = _GitalkComponent
 
-const GitalkComment: React.FC<GitalkCommentProps> = ({ id }) => (
+const GitalkComment: React.FC<GitalkCommentProps> = ({ id, title }) => (
     <BrowserOnly>
         {() => (
             <GitalkComponent
@@ -114,6 +114,7 @@ const GitalkComment: React.FC<GitalkCommentProps> = ({ id }) => (
                     owner: 'tarojsx',
                     admin: ['cncolder'],
                     id,
+                    title,
                 }}
             />
         )}

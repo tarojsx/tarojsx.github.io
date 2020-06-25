@@ -54,7 +54,7 @@ function BlogPostPage(props) {
                                     <BlogPostPaginator nextItem={nextItem} prevItem={prevItem} />
                                 </div>
                             )}
-                            <GitalkComment id={metadata.permalink} />
+                            <GitalkComment id={metadata.permalink} title={metadata.title} />
                         </div>
                     </div>
                 </div>
