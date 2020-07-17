@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[156],{489:function(a){a.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"mini-program","name":"miniprogram","count":1,"permalink":"/blog/tags/mini-program"}')}}]);
