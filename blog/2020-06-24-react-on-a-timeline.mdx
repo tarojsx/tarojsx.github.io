@@ -54,7 +54,7 @@ React 的出现为前端构建友好的用户界面提供了广阔的机遇。
 
 ```js title="读取 HTML 片段插入到页面中"
 var xhr = new XMLHttpRequest()
-xhr.onreadystatechange = function() {
+xhr.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         document.getElementById('demo').innerHTML = xhr.responseText
     }
@@ -120,7 +120,7 @@ var data = ['React Hook 最佳实践', 'React 16.x 的规划', 'React Profiler �
 
 ```jsx title="最早的 React Hello World"
 var Hello = React.createClass({
-    render: function() {
+    render: function () {
         return <div>Hello {this.props.name}</div>
     },
 })

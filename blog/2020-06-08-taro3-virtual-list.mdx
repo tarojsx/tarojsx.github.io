@@ -34,8 +34,8 @@ const Demo = () => (
 
 import { FixedSizeList } from 'react-window'
 
-<FixedSizeList style={{ margin: 30, border: '1px solid silver' }}  height={300} itemCount={1000} itemSize={30}>
-    {({ index, style }) => <div style={{...style, paddingLeft: 10}}>行号：{index+1}</div>}
+<FixedSizeList style={{ margin: 30, border: '1px solid silver' }} height={300} itemCount={1000} itemSize={30}>
+    {({ index, style }) => <div style={{ ...style, paddingLeft: 10 }}>行号：{index + 1}</div>}
 </FixedSizeList>
 
 `FixedSizeList` 用于显示固定行高的列表，指定高度(`height`)确定视口，通过长度(`itemCount`)和行高(`itemSize`)计算出可见区域，每一行所需显示的内容通过 Render Props 由用户自己决定。
@@ -43,6 +43,7 @@ import { FixedSizeList } from 'react-window'
 上面的例子中，我们指定列表的高度为 300，行高为 30，虽然数据有 1000 条，实际渲染的只有 10 行。_（算上视口外预加载行实际超过 10 行）_
 
 `FixedSizeList` 本身渲染后的 DOM 结构共分两层：
+
 1. 外部滚动元素，相当于灰色边框部分。
 2. 内部占位元素，实际是一个占位区块。在上例中这个区块的高度是 30000，滚动时这个区块会整体向上移动，只露出 10 行。
 
@@ -59,6 +60,7 @@ import { FixedSizeList } from 'react-window'
 其中 `innerElementType` 比较简单，直接替换即可，`innerElementType={View}`。
 
 对于 `outerElementType` 对应的 `<ScrollView>`，经过尝试发现要满足以下 3 个条件：
+
 1. 向下传递 `ref`
 2. `onScroll` 事件参数要具备 `{currentTarget: {clientWidth, clientHeight}}`
 3. 允许滚动。（因为 `<ScrollView>` 默认是不能滚动的。。。）
@@ -82,7 +84,7 @@ const OuterScrollView = React.forwardRef<any, ScrollViewProps>((props, ref) => {
             style={style}
             // 允许滚动
             scrollY
-            onScroll={e => {
+            onScroll={(e) => {
                 // 合成符合要求的滚动事件参数
                 onScroll({
                     ...e,
@@ -106,9 +108,7 @@ import { OuterScrollView } from './OuterScrollView'
  * FixedSizeList for Taro3
  */
 export const FixedSizeList = React.forwardRef<List, FixedSizeListProps>((props, ref) => {
-    return (
-        <List ref={ref} outerElementType={OuterScrollView} innerElementType={View} {...props} />
-    )
+    return <List ref={ref} outerElementType={OuterScrollView} innerElementType={View} {...props} />
 })
 ```
 
@@ -124,17 +124,15 @@ export const FixedSizeList = React.forwardRef<List, FixedSizeListProps>((props, 
 
 更新 config/index.js 配置，目的是向运行环境中注入 `requestAnimationFrame`。
 
-```js {6-8} title="/config/index.js"
+```js {6} title="/config/index.js"
 const { TaroProvidePlugin } = require('@tarojsx/polyfill/dist/plugins')
 
 const config = {
     mini: {
         webpackChain(chain, webpack) {
-            chain
-                .plugin('taroProviderPlugin')
-                .use(TaroProvidePlugin)
-        }
-    }
+            chain.plugin('taroProviderPlugin').use(TaroProvidePlugin)
+        },
+    },
 }
 ```
 
@@ -152,9 +150,9 @@ export default () => {
     const [data, setData] = useState<{ name: string }[]>([])
 
     useEffect(() => {
-        (async () => {
+        ;(async () => {
             const res = await Taro.request({
-                url: 'https://example.com/api/users'
+                url: 'https://example.com/api/users',
             })
             setData(res.data)
         })()
@@ -162,14 +160,11 @@ export default () => {
 
     return (
         <View>
-            <FixedSizeList
-                width={windowWidth}
-                height={windowHeight}
-                itemCount={data.length}
-                itemSize={50}
-            >
+            <FixedSizeList width={windowWidth} height={windowHeight} itemCount={data.length} itemSize={50}>
                 {({ index, style }) => (
-                    <View key={index} style={style}>{data[index].name}</View>
+                    <View key={index} style={style}>
+                        {data[index].name}
+                    </View>
                 )}
             </FixedSizeList>
         </View>

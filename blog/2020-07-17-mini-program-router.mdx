@@ -1,0 +1,264 @@
+---
+id: 2020-07-17-mini-program-router
+title: 细说微信小程序路由
+author: Colder
+author_url: https://github.com/cncolder
+author_image_url: https://avatars1.githubusercontent.com/u/127009
+tags: [MiniProgram, Router]
+---
+
+![React](/img/undraw_by_the_road.svg)
+
+小程序路由，就是每天使用小程序跳转来跳转去的那部分（不是跳一跳），咋一看和 Web 差不多。
+
+**实际上差很多**
+
+<!-- truncate -->
+
+:::note
+本文采用 Taro 和 React 中概念，最终是为了解释微信小程序中的问题。
+:::
+
+import clsx from 'clsx'
+import { UI } from '@/ui'
+
+## 路由的由来
+
+Web 开发原本没有路由的概念，用户点击 `<a>` 标签前往新页面，点击后退按钮返回上一页，国内网站喜欢弹出新页面。
+
+新生代的浏览器意识到总是弹出新窗口，桌面很快变的杂乱无章，于是发明了 Tab 标签，本质上是一样的。
+
+直到前端进入单页应用时代（SPA），一整个网站放进一个网页里，跳转页面的概念没有了，取而代之的是单页应用切换呈现的内容，也就是今天要谈到的“路由”。
+
+## React Web 路由
+
+在 React 领域，[`react-router`](https://github.com/ReactTraining/react-router) 已经成为默认的路由系统，它通过匹配 URL，找到对应的组件显示出来，可以更新整个页面，也可以只切换一部分。
+
+为了性能，路由只显示当前页面，之前和之后的页面在离开后会被卸载（componentWillUnmount）。
+
+<UI web>
+    {() => {
+        const style = {
+            position: 'absolute',
+            top: 50,
+            borderRadius: 5,
+            width: 400,
+            height: 300,
+            opacity: 0.4,
+            background: '#ddd',
+            transform: 'rotateY(40deg)',
+        }
+        return (
+            <div style={{ perspective: 1000, height: 500 }}>
+                <div style={{ ...style, left: 0, textDecoration: 'line-through' }}>首页</div>
+                <div style={{ ...style, left: 100, textDecoration: 'line-through' }}>博客</div>
+                <div style={{ ...style, top: 100, left: 110, textDecoration: 'line-through' }}>文档</div>
+                <div style={{ ...style, top: 150, left: 120, textDecoration: 'line-through' }}>关于</div>
+                <div style={{ ...style, left: 250, opacity: 0.9, background: 'var(--ifm-link-color)' }}>
+                    细说微信小程序路由
+                </div>
+            </div>
+        )
+    }}
+</UI>
+
+## 小程序路由
+
+小程序与 Web 最大的区别是独立的渲染层，这使得小程序有能力维护真实的页面栈（最多 10 个），而不仅仅是逻辑上的路由历史。
+
+![Mini Program Webview and JsCore](https://res.wx.qq.com/wxdoc/dist/assets/img/4-1.ad156d1c.png)
+
+如果上图中的 3 个 Webview 就是本站的 3 个页面的话，他们之间的关系是这样的：
+
+-   打开程序时，“首页”显示。
+-   打开“博客”，“首页”隐藏，“博客”显示。
+-   打开“文章”，“博客”隐藏，“文章”显示。
+
+<UI web>
+    {() => {
+        const style = {
+            position: 'absolute',
+            top: 50,
+            borderRadius: 5,
+            width: 400,
+            height: 300,
+            opacity: 0.4,
+            background: 'var(--ifm-link-color)',
+            transform: 'rotateY(40deg)',
+        }
+        return (
+            <div style={{ perspective: 1000, height: 420 }}>
+                <div style={{ ...style, left: 0 }}>首页（隐藏）</div>
+                <div style={{ ...style, left: 100 }}>博客（隐藏）</div>
+                <div style={{ ...style, left: 250, opacity: 0.9 }}>细说微信小程序路由（当前）</div>
+            </div>
+        )
+    }}
+</UI>
+
+这有什么区别呢？想象一下现在你后退到“博客”页面，“博客”只是由隐藏变成显示，不会触发 componentDidMount，本来在这个生命周期里读取文章列表就能更新阅读数，现在没法更新了。
+
+如果要实现“路过”页面时更新数据，onDidShow 会更加合适。
+
+这一点反映出小程序中的路由与 Web app 中的路由之间的区别。Web app 只在乎历史记录，而小程序中保留了真实的页面，称为“页面栈”，也就是当前打开的一摞页面。
+
+## 小程序页面栈
+
+让我们用一个可操作的例子来演示一下小程序在路由跳转后究竟发生了什么。
+
+请想象左边是一个带 TabBar 的小程序，右边显示页面栈信息。
+
+<UI web>
+    {() => {
+        const tree = {
+            children: [
+                {
+                    title: '首页',
+                    children: [
+                        {
+                            title: 'UI',
+                            children: [{ title: 'Button', children: [{ title: '示例' }, { title: 'API' }] }],
+                        },
+                    ],
+                },
+                { title: '我的', children: [{ title: '帮助', children: [{ title: '回到首页' }] }] },
+            ],
+        }
+        const [stack, setStack] = React.useState([0])
+        const page = stack.reduce((tree, index) => tree.children[index], tree)
+        const [pages] = stack.reduce(
+            ([pages, page], index) => {
+                page = page.children[index]
+                pages.push(page)
+                return [pages, page]
+            },
+            [[], tree]
+        )
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    margin: 30,
+                    color: '#fff',
+                    textAlign: 'center',
+                    fontSize: 28,
+                    fontWeight: 'bolder',
+                    cursor: 'pointer',
+                }}
+            >
+                <div
+                    style={{
+                        borderRadius: 10,
+                        width: 375,
+                        height: 550,
+                        background: 'var(--ifm-link-color)',
+                    }}
+                >
+                    <div style={{ height: 500 }}>
+                        <div
+                            style={{
+                                visibility:
+                                    stack.length > 1 && pages[pages.length - 1].title !== '帮助' ? 'visible' : 'hidden',
+                                padding: 10,
+                                textAlign: 'left',
+                                fontWeight: 900,
+                            }}
+                            onClick={() => setStack((prev) => prev.reverse().slice(1).reverse())}
+                        >
+                            {'< 后退'}
+                        </div>
+                        {[...pages].pop()?.children?.map(({ title }, index) => (
+                            <div
+                                key={index}
+                                style={{ paddingTop: 20 }}
+                                onClick={() => setStack((prev) => (title === '回到首页' ? [0] : [...prev, index]))}
+                            >
+                                {title}
+                            </div>
+                        ))}
+                    </div>
+                    <div
+                        style={{
+                            visibility: stack.length === 1 ? 'visible' : 'hidden',
+                            display: 'flex',
+                            alignItems: 'center',
+                            borderRadius: '0 0 10px 10px',
+                            height: 50,
+                            background: 'rgba(60,60,60,.3)',
+                        }}
+                    >
+                        {tree.children.map(({ title }, index) => (
+                            <div
+                                key={index}
+                                className={clsx({ 'text--warning': index === stack[0] })}
+                                style={{ flex: 1 }}
+                                onClick={() => setStack([index])}
+                            >
+                                {title}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div style={{ display: 'flex', flexFlow: 'column', justifyContent: 'flex-end' }}>
+                    {(pages.reverse()).map(({ title }, index, array) => (
+                        <div
+                            key={index}
+                            className={clsx({ 'text--warning': !index })}
+                            style={{
+                                margin: 5,
+                                lineHeight: 1.5,
+                                borderRadius: 10,
+                                width: 200,
+                                background: 'var(--ifm-link-color)',
+                                opacity: !index ? 1 : 0.5,
+                            }}
+                        >
+                            {title}
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    }}
+</UI>
+
+首先，在小程序刚刚启动时，页面栈是空的。初始化以后，第一个打开的是“首页”，当前页面栈中只有一个页面。
+
+1. 尝试点击 “UI” - “Button”，页面栈会依次增长，上一个页面依次隐藏（onDidHide）。
+2. 点击“后退”按钮，页面依次卸载（componentWillUnmount），上一页依次显示（onDidShow）。
+3. 直到返回到“首页”，因为是 TabBar 中的页面，一旦打开无法轻易卸载，即使是切换到其他 Tab。
+
+现在让我们切换到“我的” Tab 页。
+
+1. 点击“帮助”。
+2. 这个页面没有返回按钮，但是有一个“回到首页”的功能，点击它，会调用 switchTab 返回首页。
+3. 注意页面栈的变化，“我的”这一条线被清空，替换回“首页”这一堆栈。
+
+页面栈好似一摞扑克牌，每张扑克代表一个页面，每次只能有一摞，最底下的一张是首页或 Tab 页，进入新页面（navigateTo）相当于在上面放一张新牌，后退（navigateBack）相当于剔除一张，直到只剩最后一张，切换 Tab 时推倒重来。
+
+:::note
+[自定义 TabBar（custom-tab-bar）](https://developers.weixin.qq.com/miniprogram/dev/framework/ability/custom-tabbar.html)的行为是与原生 TabBar 保持一致的。
+:::
+
+> 题外话：如果你接触的小程序项目比较多，那你一定见过在有些项目里，TabBar 没有使用微信给出的方案，而是采用自定义组件实现 TabBar 的效果，并把几个 Tab 页合并成一个巨大的首页。纵使千百个理由，无非是一个借口，对小程序缺乏理解而去生搬硬套 Web 里的东西。
+
+## 总结
+
+**那么页面会在什么情况下卸载（`componentWillUnmount`），什么情况下隐藏（`onDidHide`）呢？**
+
+卸载（`componentWillUnmount`）会在以下情况时发生：
+
+1. 后退，包括点击后退按钮或调用 [`navigateBack`](https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.navigateBack.html)。
+2. [`redirectTo`](https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.redirectTo.html)，相当于在页面栈里替换掉当前页面。
+3. 非 Tab 页调用 [`switchTab`](https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.switchTab.html)。
+4. [`reLaunch`](https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.reLaunch.html)，当前所有页面都会卸载，包括 Tab 页。
+
+隐藏（`onDidHide`）会在以下情况时发生：
+
+1. 以上 4 种情况因为页面卸载了，自然会触发隐藏。
+2. 前往新页面，[`navigateTo`](https://developers.weixin.qq.com/miniprogram/dev/api/route/wx.navigateTo.html) 或 [`<navigator>`](https://developers.weixin.qq.com/miniprogram/dev/component/navigator.html) 组件。
+3. 弹出微信原生界面，例如：授权、拍照、分享、浮窗、设置等。
+4. 弹出手机原生界面，例如：来电、切换后台等。
+5. 微信 App 最小化。
+6. 可能还有更多。。。
