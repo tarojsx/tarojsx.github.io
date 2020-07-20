@@ -50,6 +50,7 @@ module.exports = {
     ],
     Library: [
         'library/README',
+        'library/docs/antv-f2',
         'library/docs/react-window',
         'library/docs/react-vtree',
         'library/docs/react-spring',

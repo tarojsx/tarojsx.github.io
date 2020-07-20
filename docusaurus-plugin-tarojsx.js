@@ -25,7 +25,7 @@ module.exports = function pluginSyncDocs(context, opts) {
         async loadContent() {
             // The loadContent hook is executed after siteConfig and env has been loaded
             // You can return a JavaScript object that will be passed to contentLoaded hook
-            console.log('loadContent', 'rsync docs')
+            // console.log('loadContent', 'rsync docs')
             child.spawnSync('npm', ['run', 'prestart'])
         },
 
@@ -73,7 +73,11 @@ module.exports = function pluginSyncDocs(context, opts) {
                 config.entry.main = [path.resolve(__dirname, 'docusaurus-taro-h5.ts'), config.entry.main]
             }
 
-            config.resolve.alias['@tarojs/components$'] = '@tarojs/components/h5/react'
+            // 防止多份 react 引起的 hooks 问题.
+            config.resolve.alias['react'] = path.resolve(__dirname, 'node_modules', 'react')
+            // 重定义 taro 组件到 h5 版本.
+            config.resolve.alias['@tarojs/components$'] = '@tarojs/components/dist-h5/react'
+            // UI 组件快捷方式
             config.resolve.alias['@/ui'] = path.resolve(__dirname, 'src', 'ui')
 
             config.plugins.push(new webpack.EnvironmentPlugin({ TARO_ENV: 'h5', FRAMEWORK: 'react' }))

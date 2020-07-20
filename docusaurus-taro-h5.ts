@@ -1,6 +1,7 @@
 // import React from 'react'
 import Taro from '@tarojs/taro'
-import Taro2 from '@tarojsx/ui/node_modules/@tarojs/taro'
+import TaroInUI from '@tarojsx/ui/node_modules/@tarojs/taro'
+import TaroInLibrary from '@tarojsx/library/node_modules/@tarojs/taro'
 import { window as taroRuntimeWindow } from '@tarojs/runtime'
 import '@tarojs/components/dist/taro-components/taro-components.css'
 
@@ -23,10 +24,49 @@ const pxTransform = function(size: any) {
     return Math.ceil((((parseInt(size, 10) / 40) * 640) / designWidth) * 10000) / 10000 + 'rem'
 }
 
-for (const taro of [Taro, Taro2]) {
+for (const taro of [Taro, TaroInUI, TaroInLibrary]) {
     taro.initPxTransform(pxTransformConfig)
     taro.pxTransform = taro.pxTransform || pxTransform
     taro.getCurrentPages = () => []
+    taro.getSystemInfoSync = () => ({
+        SDKVersion: '2.12.0',
+        batteryLevel: 100,
+        benchmarkLevel: 1,
+        brand: 'devtools',
+        deviceOrientation: 'portrait',
+        devicePixelRatio: 3,
+        fontSizeSetting: 16,
+        language: 'zh_CN',
+        model: 'iPhone X',
+        pixelRatio: 3,
+        platform: 'devtools',
+        safeArea: {
+            bottom: 812,
+            height: 768,
+            left: 0,
+            right: 375,
+            top: 44,
+            width: 375,
+        },
+        screenHeight: 812,
+        screenWidth: 375,
+        statusBarHeight: 44,
+        system: 'iOS 10.0.1',
+        version: '7.0.4',
+        windowHeight: 724,
+        windowWidth: 375,
+        albumAuthorized: false,
+        bluetoothEnabled: false,
+        cameraAuthorized: false,
+        locationAuthorized: false,
+        locationEnabled: false,
+        microphoneAuthorized: false,
+        notificationAlertAuthorized: false,
+        notificationAuthorized: false,
+        notificationBadgeAuthorized: false,
+        notificationSoundAuthorized: false,
+        wifiEnabled: true,
+    })
 }
 
 /* 第一次尝试: 把 Taro 组件映射到 Html Tag */
